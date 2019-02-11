@@ -19,7 +19,7 @@ public class TrainerController {
         return this.trainerService.getAllTrainers();
     }
 
-    @GetMapping(value = "/{name}", produces="application/json", consumes="application/json")
+    @GetMapping(value = "/{name}", produces="application/json")
     public Trainer getTrainer(@PathVariable("name") String name){
         return this.trainerService.getTrainer(name);
     }
@@ -42,7 +42,7 @@ public class TrainerController {
         }
     }
 
-    @DeleteMapping(value = "/{name}", produces="application/json", consumes="application/json")
+    @DeleteMapping(value = "/{name}", produces="application/json")
     public ResponseEntity deleteTrainer(@PathVariable("name") String name){
         try {
             return ResponseEntity.ok(this.trainerService.removeTrainer(name));
