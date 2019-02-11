@@ -14,7 +14,7 @@ public class TrainerController {
         this.trainerService = trainerService;
     }
 
-    @GetMapping(value = "/", produces="application/json", consumes="application/json")
+    @GetMapping(value = "/")
     public Iterable<Trainer> getAllTrainers(){
         return this.trainerService.getAllTrainers();
     }
