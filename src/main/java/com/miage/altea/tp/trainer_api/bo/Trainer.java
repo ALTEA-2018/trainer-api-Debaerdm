@@ -1,7 +1,5 @@
 package com.miage.altea.tp.trainer_api.bo;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,6 +8,9 @@ public class Trainer {
 
     @Id
     private String name;
+
+    @Column
+    private String password;
 
     @OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private List<Pokemon> team;
@@ -27,6 +28,14 @@ public class Trainer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Pokemon> getTeam() {
