@@ -3,12 +3,15 @@ package com.miage.altea.tp.trainer_api.service;
 import com.miage.altea.tp.trainer_api.bo.Trainer;
 import com.miage.altea.tp.trainer_api.repository.TrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TrainerServiceImpl implements TrainerService {
 
     private TrainerRepository trainerRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
 
     @Autowired
     public TrainerServiceImpl(TrainerRepository trainerRepository) {
@@ -31,12 +34,14 @@ public class TrainerServiceImpl implements TrainerService {
             throw new IllegalArgumentException("Trainer don't exist or already deleted");
         }
 
+        trainer.setPassword(bCryptPasswordEncoder.encode(trainer.getPassword()));
         return this.trainerRepository.save(trainer);
     }
 
     @Override
     public Trainer updateTrainer(Trainer trainer) {
         if (this.trainerRepository.existsById(trainer.getName())) {
+            trainer.setPassword(bCryptPasswordEncoder.encode(trainer.getPassword()));
             return this.trainerRepository.save(trainer);
         } else {
             throw new IllegalArgumentException("Trainer don't exist or already deleted");
